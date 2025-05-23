@@ -8,9 +8,18 @@ const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
+const allowedOrigins = [
+  'https://task-management-frontend-rho-lime.vercel.app',
+  'http://localhost:5173'
+];
+
 app.use(cors({
-    origin:["http://localhost:5173","https://task-management-frontend-rho-lime.vercel.app/"]
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
+
 app.use(express.json());
 app.use('/uploads', express.static('uploads')); // Serve PDFs
 
